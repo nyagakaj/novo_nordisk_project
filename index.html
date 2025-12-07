@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GLP-1 Global Demand & Supply Intelligence Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles -->
+    <style>
+      :root {
+        --nn-blue: #002554;
+        --nn-blue-light: #00539b;
+        --nn-orange: #ff6c00;
+        --nn-grey: #4b5563;
+        --nn-bg-light: #ffffff;
+        --nn-bg-soft: #f3f4f6;
+      }
+
+      body {
+        background: var(--nn-bg-soft);
+        color: #111827;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .badge-pill {
+        border-radius: 999px;
+        padding: 0.25rem 0.9rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .badge-nn {
+        background-color: rgba(0, 37, 84, 0.06);
+        color: var(--nn-blue);
+      }
+
+      .section-padding {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      .nn-card {
+        border-radius: 1rem;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+        background-color: #ffffff;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .nn-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      }
+
+      .nn-card-muted {
+        background: #f9fafb;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+      }
+
+      .text-nn-blue {
+        color: var(--nn-blue);
+      }
+
+      .text-nn-blue-light {
+        color: var(--nn-blue-light);
+      }
+
+      .text-nn-orange {
+        color: var(--nn-orange);
+      }
+
+      .text-muted-strong {
+        color: var(--nn-grey);
+      }
+
+      .pill-heading {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      /* Simple architecture diagram */
+      .diagram {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .diagram {
+          flex-direction: row;
+        }
+      }
+
+      .diagram-block {
+        flex: 1;
+        padding: 1rem 1.1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        background: #f9fafb;
+        position: relative;
+      }
+
+      .diagram-block h6 {
+        font-size: 0.8rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--nn-blue-light);
+      }
+
+      .diagram-arrow {
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        .diagram-arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          color: rgba(148, 163, 184, 0.9);
+          padding: 0 0.5rem;
+        }
+      }
+
+      /* Small pill tags */
+      .tag {
+        display: inline-block;
+        padding: 0.15rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        background: rgba(0, 83, 155, 0.06);
+        color: var(--nn-blue-light);
+        margin-right: 0.4rem;
+        margin-bottom: 0.25rem;
+      }
+
+      /* Hero styling */
+      .hero-shell {
+        background: radial-gradient(circle at top left, rgba(0, 83, 155, 0.13), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(255, 108, 0, 0.12), transparent 60%);
+        border-radius: 1.5rem;
+        padding: 3rem 2.5rem;
+        background-color: #ffffff;
+      }
+
+      @media (max-width: 767.98px) {
+        .hero-shell {
+          padding: 2.2rem 1.5rem;
+        }
+      }
+
+      /* Nav styling */
+      .navbar {
+        background: #ffffff;
+      }
+
+      .navbar-shadow {
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+      }
+
+      .nav-link {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .nav-link.active {
+        color: var(--nn-blue-light) !important;
+        font-weight: 600;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV / HEADER -->
+    <nav class="navbar navbar-expand-lg border-bottom navbar-shadow sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-semibold text-nn-blue" href="#">
+          GLP-1 Intelligence
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+          aria-controls="navMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+          <ul class="navbar-nav mb-2 mb-lg-0 gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link text-muted active" href="#hero">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="#trend">Trend</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="#architecture">Architecture</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="#visuals">Visuals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="#about">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+      <!-- HERO -->
+      <section id="hero" class="section-padding">
+        <div class="hero-shell">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+              <span class="badge badge-pill badge-nn mb-3">
+                Digital trend · AI forecasting · Supply chain
+              </span>
+              <h1 class="display-6 fw-semibold text-nn-blue">
+                GLP-1 Global Demand &amp; Supply Intelligence Platform
+              </h1>
+              <p class="lead text-muted-strong mt-3">
+                A concept project that explores how AI-powered predictive analytics
+                and intuitive dashboards can help pharmaceutical companies like Novo
+                Nordisk anticipate GLP-1 demand, simulate manufacturing scenarios
+                and support more equitable, sustainable access to life-changing
+                therapies.
+              </p>
+            </div>
+            <div class="col-lg-5">
+              <div class="nn-card p-4">
+                <div class="pill-heading text-nn-blue-light mb-2">
+                  How this links to the graduate programme
+                </div>
+                <p class="small text-muted-strong mb-2">
+                  This project illustrates the recent digital business trend of
+                  using data platforms and AI forecasting to solve complex
+                  supply-chain problems. It shows how I would approach Enterprise
+                  IT at Novo Nordisk: combining system thinking, analytics and user-
+                  centred design to enable better decisions.
+                </p>
+                <p class="small mb-1">
+                  <span class="fw-semibold">Tech (enabler, not the hero):</span>
+                  HTML, Bootstrap, Chart.js, simulated forecasting logic.
+                </p>
+                <p class="small text-muted-strong mb-0">
+                  Inspired by insights from Novo Nordisk’s 2024 Annual Report.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIGITAL TREND -->
+      <section id="trend" class="section-padding">
+        <div class="row g-4">
+          <div class="col-md-8">
+            <h2 class="h4 fw-semibold text-nn-blue">
+              Digital business trend: AI-powered predictive supply-chain analytics
+            </h2>
+            <p class="text-muted-strong">
+              Across industries, a key shift in digital business is the move from
+              descriptive dashboards to <strong>predictive and scenario-based
+              decision platforms</strong>. AI-powered forecasting tools are now used
+              to anticipate demand, optimise inventory and stress-test different
+              strategic choices before they are implemented.
+            </p>
+            <p class="text-muted-strong">
+              In the pharmaceutical industry, this trend is especially relevant for
+              therapies experiencing <strong>explosive global demand</strong>, such as
+              GLP-1-based medicines for diabetes and obesity. Traditional planning
+              approaches struggle to keep up with rapid uptake, constrained
+              manufacturing capacity and regional access considerations. Digital
+              forecasting platforms can help companies see around corners, making
+              supply chains more resilient, equitable and sustainable.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div class="nn-card-muted p-3 h-100">
+              <div class="pill-heading text-nn-blue-light mb-2">
+                What this concept demonstrates
+              </div>
+              <ul class="small text-muted-strong mb-0">
+                <li>Understanding of AI forecasting as a digital business trend.</li>
+                <li>Application to GLP-1 capacity and access challenges.</li>
+                <li>System-level view from data to decision-making.</li>
+                <li>Ability to translate strategy into a concrete digital product idea.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROBLEM & SOLUTION -->
+      <section class="section-padding border-top">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h2 class="h4 fw-semibold text-nn-blue">Problem in context</h2>
+            <ul class="text-muted-strong small">
+              <li>Rapidly increasing global demand for GLP-1 therapies.</li>
+              <li>Long lead times and finite manufacturing capacity expansions.</li>
+              <li>Risk of regional shortages and inequitable access for vulnerable groups.</li>
+              <li>Need to align commercial, clinical and sustainability objectives.</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h2 class="h4 fw-semibold text-nn-blue">Conceptual solution</h2>
+            <ul class="text-muted-strong small">
+              <li>
+                A <strong>Global GLP-1 Demand &amp; Supply Intelligence Platform</strong>
+                that brings together data, forecasting models and visual decision support.
+              </li>
+              <li>
+                AI-inspired forecasting logic to project demand by region and patient segment.
+              </li>
+              <li>
+                Scenario analysis tools to explore capacity changes, market launches and
+                access strategies.
+              </li>
+              <li>
+                A clean web interface where cross-functional teams can explore future
+                states and trade-offs.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE DIAGRAM -->
+      <section id="architecture" class="section-padding border-top">
+        <h2 class="h4 fw-semibold text-nn-blue mb-3">
+          Technical architecture (conceptual)
+        </h2>
+        <p class="small text-muted-strong mb-3">
+          The diagram below shows how the platform could be implemented in practice.
+          The current prototype focuses on the frontend and uses dummy data, but the
+          structure is designed so it can later connect to real data and forecasting
+          services.
+        </p>
+
+        <div class="diagram mb-3">
+          <div class="diagram-block">
+            <h6 class="mb-1">1 · Data layer</h6>
+            <p class="small text-muted-strong mb-2">
+              Aggregates key inputs required to understand GLP-1 dynamics:
+            </p>
+            <p class="small text-muted-strong mb-1">
+              <span class="tag">Historical demand</span>
+              <span class="tag">Epidemiology</span>
+              <span class="tag">Population projections</span>
+              <span class="tag">Launch plans</span>
+              <span class="tag">Supply capacity</span>
+            </p>
+            <p class="small text-muted-strong mb-0">
+              In a full implementation, this could be a cloud data platform
+              (e.g., data lake or warehouse) with governed, validated data.
+            </p>
+          </div>
+
+          <div class="diagram-arrow">
+            &rarr;
+          </div>
+
+          <div class="diagram-block">
+            <h6 class="mb-1">2 · Analytics &amp; forecasting</h6>
+            <p class="small text-muted-strong mb-2">
+              Applies forecasting logic and scenario engines to the data:
+            </p>
+            <p class="small text-muted-strong mb-1">
+              <span class="tag">Growth models</span>
+              <span class="tag">Time-series methods</span>
+              <span class="tag">Scenario simulation</span>
+              <span class="tag">Capacity constraints</span>
+            </p>
+            <p class="small text-muted-strong mb-0">
+              In a real system, this layer could use Python/R, MLOps pipelines and
+              APIs to expose forecasts to the frontend.
+            </p>
+          </div>
+
+          <div class="diagram-arrow">
+            &rarr;
+          </div>
+
+          <div class="diagram-block">
+            <h6 class="mb-1">3 · Decision &amp; visualisation layer</h6>
+            <p class="small text-muted-strong mb-2">
+              Turns model outputs into actionable views for teams:
+            </p>
+            <p class="small text-muted-strong mb-1">
+              <span class="tag">Demand forecasts</span>
+              <span class="tag">Regional heatmaps</span>
+              <span class="tag">Scenario comparisons</span>
+              <span class="tag">Equity &amp; risk flags</span>
+            </p>
+            <p class="small text-muted-strong mb-0">
+              The current HTML + Bootstrap prototype simulates this layer with dummy
+              data visualised via Chart.js.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHARTS -->
+      <section id="visuals" class="section-padding border-top">
+        <h2 class="h4 fw-semibold text-nn-blue mb-4">
+          Prototype visuals (dummy data)
+        </h2>
+
+        <div class="row g-4">
+          <!-- Demand forecast chart -->
+          <div class="col-lg-7">
+            <div class="nn-card p-3">
+              <div class="pill-heading text-nn-blue-light mb-2">
+                Global GLP-1 demand forecast (indexed, dummy data)
+              </div>
+              <canvas id="forecastChart" height="160"></canvas>
+              <p class="small text-muted-strong mt-2 mb-0">
+                This illustrative chart shows a simplified, indexed demand forecast
+                (2022–2030) for GLP-1 therapies. In a real system, these values
+                would come from the forecasting layer based on live data.
+              </p>
+            </div>
+          </div>
+
+          <!-- Regional allocation/chart -->
+          <div class="col-lg-5">
+            <div class="nn-card p-3 mb-3">
+              <div class="pill-heading text-nn-blue-light mb-2">
+                Illustrative regional allocation (dummy data)
+              </div>
+              <canvas id="regionChart" height="130"></canvas>
+              <p class="small text-muted-strong mt-2 mb-0">
+                Dummy data for allocation shares by region. In practice, this view
+                could highlight potential mismatches between demand and supply, or
+                compare equity-focused vs. revenue-focused allocation strategies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SYSTEM THINKING & IMPACT -->
+      <section class="section-padding border-top">
+        <h2 class="h4 fw-semibold text-nn-blue mb-3">
+          System-thinking view: from signal to patient impact
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-7">
+            <p class="small text-muted-strong">
+              This concept is less about the specific chart and more about
+              <strong>how digital tools can support system-level decisions</strong>.
+              By connecting forecasting, manufacturing and allocation into a single
+              view, Enterprise IT can help leaders:
+            </p>
+            <ul class="small text-muted-strong mb-2">
+              <li>Anticipate where demand is likely to exceed supply.</li>
+              <li>Test different capacity or launch scenarios before committing resources.</li>
+              <li>Compare strategies that prioritise vulnerable markets or new indications.</li>
+              <li>Integrate sustainability and access metrics into core decision-making.</li>
+            </ul>
+            <p class="small text-muted-strong mb-0">
+              In my view, this is how the digital business trend of AI-powered
+              forecasting will shape the future of the pharmaceutical industry:
+              not as a standalone “AI feature”, but as an enabler of more
+              transparent, ethical and evidence-driven decisions about how we
+              bring innovative medicines to people who need them.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <div class="nn-card-muted p-3 h-100">
+              <div class="pill-heading text-nn-blue-light mb-2">
+                Future extensions
+              </div>
+              <ul class="small text-muted-strong mb-0">
+                <li>Add a sustainability layer (e.g., CO₂e per scenario, device footprint).</li>
+                <li>Incorporate AI-governance checks for transparency and fairness.</li>
+                <li>Connect to real internal data warehouses via secure APIs.</li>
+                <li>Embed into enterprise planning workflows for cross-functional teams.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section-padding border-top">
+        <h2 class="h5 fw-semibold text-nn-blue mb-2">About the creator</h2>
+        <p class="small text-muted-strong mb-0">
+          John Nyagaka is a Mastercard Foundation Scholar at the University of Toronto,
+          pursuing a Master of Health Informatics. He has experience at Africa CDC building
+          data products and dashboards for public-health decision-making. This concept project
+          is part of his application to the Novo Nordisk Global Digital Business Graduate
+          Programme and reflects how he thinks about digital innovation: using technology as
+          an enabler to connect strategy, data and real-world patient impact.
+        </p>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-top bg-white mt-3 py-3">
+      <div class="container text-center">
+        <p class="small text-muted mb-1">
+          Made by <span class="fw-semibold">John Nyagaka</span>
+        </p>
+        <p class="small text-muted mb-0">
+          Mastercard Foundation Scholar at the University of Toronto, pursuing a Master of Health Informatics.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Charts with dummy data -->
+    <script>
+      // Demand forecast dummy data
+      const forecastCtx = document.getElementById("forecastChart").getContext("2d");
+      const forecastLabels = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"];
+      const forecastValues = [100, 130, 165, 200, 240, 280, 320, 360, 400]; // indexed demand
+
+      new Chart(forecastCtx, {
+        type: "line",
+        data: {
+          labels: forecastLabels,
+          datasets: [
+            {
+              label: "Indexed GLP-1 demand (dummy forecast)",
+              data: forecastValues,
+              borderWidth: 2,
+              fill: false,
+              borderColor: "#00539b",
+              pointBackgroundColor: "#ff6c00",
+              tension: 0.25
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: "#4b5563"
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: "#6b7280" },
+              grid: { color: "rgba(209,213,219,0.6)" }
+            },
+            y: {
+              ticks: { color: "#6b7280" },
+              grid: { color: "rgba(209,213,219,0.6)" }
+            }
+          }
+        }
+      });
+
+      // Regional allocation dummy data
+      const regionCtx = document.getElementById("regionChart").getContext("2d");
+      const regionLabels = ["North America", "Europe", "Asia-Pacific", "Latin America", "Africa & ME"];
+      const regionValues = [30, 28, 22, 12, 8]; // shares, dummy
+
+      new Chart(regionCtx, {
+        type: "bar",
+        data: {
+          labels: regionLabels,
+          datasets: [
+            {
+              label: "Illustrative allocation share (%)",
+              data: regionValues,
+              backgroundColor: ["#00539b", "#002554", "#ff6c00", "#0ea5e9", "#64748b"]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: "#4b5563"
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: "#6b7280" },
+              grid: { display: false }
+            },
+            y: {
+              ticks: { color: "#6b7280" },
+              grid: { color: "rgba(209,213,219,0.6)" }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
